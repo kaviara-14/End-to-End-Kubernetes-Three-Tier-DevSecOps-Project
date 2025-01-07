@@ -14,9 +14,12 @@ This project automates the deployment of a three-tier application using the foll
 
 ### 1. Configure Jenkins Server 
 
-- Create an ec2 instance with with instance type as **t2.2x large** and ami is **ubuntu Image** and volume as 30gb.
-- In Key Pair section, choose proceed without a key pair we are going to use SSM(Session Manager).
-- In the user data, provide the configurations you need to install.
+- Create an EC2 instance with the following specifications:
+   - **Instance type:** t2.2xlarge
+   - **AMI:** Ubuntu Image
+   - **Volume:** 30 GB
+- In the Key Pair section, choose to proceed without a key pair (SSM will be used for access).
+- Provide the below following configurations in the user data
 
 ```bash
 # Install Java
@@ -85,12 +88,14 @@ sudo snap install helm --classic
 ```
 ---
 
-### 2. Terraform Deployment using Jenkins CI/CD
+### 2. Automating Infrastructure Deployment Using Terraform and Jenkins CI/CD
 
-- Login to Jenkins Server,Go to Manage Jenkisn and install the required plugins -> store the sensitive information in credentials.
-- Create a declarative pipeline and add your jenkinsFile code for creating aws infrastructure using terraform.
-- Terraform scripts create the following, **VPC with both public and private subnets and EKS cluster deployed in private subnets**.
-- Create a Jump server(ec2 instance) in the public subnet, so that we can access securely to our eks clusters in private subnet.
+- Log in to the Jenkins server. Go to Manage Jenkins and install the required plugins. Store sensitive information in credentials.
+- Create a declarative pipeline and add the Jenkinsfile code to provision AWS infrastructure using Terraform.
+- Terraform scripts create the following,
+   - A VPC with public and private subnets.
+   - An EKS cluster deployed in private subnets.
+- Create a jump server (EC2 instance) in the public subnet to securely access the EKS cluster in the private subnet.
 
 ```bash
 # set the kube config,using this we can connect to the aws eks cluster.
@@ -127,11 +132,16 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 
 ---
 
-### 3. CI/CD Pipelines for Frontend Frontend
+### 3. CI/CD Pipelines for Frontend Servicr
 
 - Clean Up the workspace
 - Clone the repository from github 
-- Perform SonarQube analysis for code quality.Go to SonarQube Server -> Generate a token -> create and configure the webhook -> create a project in sonar-qube for frontend for code quality check -> under **Execute the Scanner** section you will get commands to run the sonarqube analysis for frontend.
+- Perform SonarQube analysis for code quality.
+   - Go to SonarQube Server.
+   - Generate a token
+   - create and configure the webhook
+   - create a project in sonar-qube for frontend for code quality check
+   - under **Execute the Scanner** section you will get commands to run the sonarqube analysis for frontend.
 - Conduct OWASP Dependency Check for vulnerabilities.
 - Scan the filesystem using Trivy.
 - Build the Docker image for the Frontend Service.
@@ -149,7 +159,10 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 
 - Clean Up the workspace.
 - Clone the repository from github
-- Perform SonarQube analysis for code quality. Go to SonarQube Server -> create a project in sonar-qube for backend to do a code quality check -> under **Execute the Scanner** section you will get commands to run the sonarqube analysis for backend.
+- Perform SonarQube analysis for code quality.
+   - Go to SonarQube Server
+   - create a project in sonar-qube for backend to do a code quality check 
+   - under **Execute the Scanner** section you will get commands to run the sonarqube analysis for backend.
 - Conduct OWASP Dependency Check for vulnerabilities.
 - Scan the filesystem with Trivy.
 - Build the Docker image for the Backend Service.
