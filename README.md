@@ -220,7 +220,9 @@ You can check out the load balancer named with k8s-three.
 
 ![Screenshot 2025-01-06 193143](https://github.com/user-attachments/assets/e5b73f6b-32b4-43b9-a914-7c71cbf30a74)
 
-### 5. Monitoring with Prometheus and graffana
+---
+
+### 6. Monitoring with Prometheus and graffana
 - **Tools Used**:
   - Prometheus for metrics collection.
   - Grafana for visualization and dashboarding.
