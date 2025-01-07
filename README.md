@@ -132,7 +132,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
 
 ---
 
-### 3. CI/CD Pipelines for Frontend Servicr
+### 3. CI/CD Pipelines for Frontend Service 
 
 - Clean Up the workspace
 - Clone the repository from github 
