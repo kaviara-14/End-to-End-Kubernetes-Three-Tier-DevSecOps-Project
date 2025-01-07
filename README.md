@@ -197,8 +197,17 @@ kubectl create namespace three-tier
 ![Screenshot 2025-01-06 163315](https://github.com/user-attachments/assets/b217b560-7cb8-48a9-b60a-521ff1371026)
 
 ---
+### 5. Route53 and deploying Ingress Controller
 
-### 4. Monitoring
+- Create Ingress Application in the ArgoCD and give path as **Kubernetnes-Manifests-File/** other details are common.Once your Ingress application is deployed. It will create an Application Load Balancer
+You can check out the load balancer named with k8s-three.
+- Now, Copy the ALB-DNS and go to your Route53 and register domain and go to DNS and add a CNAME type with hostname backend then add your ALB in the Answer and click on Save
+- I have created a subdomain kaviarasu.study
+- Now, hit your subdomain after 2 to 3 minutes in your browser to see the magic.
+
+![Screenshot 2025-01-06 193143](https://github.com/user-attachments/assets/e5b73f6b-32b4-43b9-a914-7c71cbf30a74)
+
+### 5. Monitoring with Prometheus and graffana
 - **Tools Used**:
   - Prometheus for metrics collection.
   - Grafana for visualization and dashboarding.
@@ -206,6 +215,5 @@ kubectl create namespace three-tier
   - Dashboards to monitor EKS cluster health and application performance.
 
 ![prometheus](https://github.com/user-attachments/assets/bfb08bab-9f5a-478c-8fd8-35460419f8d5)
-![Screenshot 2025-01-06 193143](https://github.com/user-attachments/assets/e5b73f6b-32b4-43b9-a914-7c71cbf30a74)
 
 --- 
